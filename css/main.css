@@ -4212,9 +4212,9 @@ td:last-child {
     z-index         : 2;
     display         : flex;
     align-items     : center;
-    position        : absolute;
+    position        : relative;
     bottom          : calc(var(--bottom-padding) - var(--vspace-0_5));
-    right           : calc(var(--gutter) + var(--vspace-0_75) - var(--width-label) - var(--vspace-1_75) - var(--vspace-0_75));
+    left: calc(100% - (var(--gutter) + var(--vspace-1_75)));
     transform       : rotate(-90deg);
     transform-origin: left bottom;
 }
