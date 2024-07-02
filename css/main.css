@@ -3351,6 +3351,7 @@ td:last-child {
 }
 
 .s-intro__content-media img {
+    filter        : brightness(90%);
     z-index       : 2;
     -o-object-fit : cover;
     object-fit    : cover;
