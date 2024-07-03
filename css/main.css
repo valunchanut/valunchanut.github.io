@@ -113,8 +113,9 @@
       --color-2-dark    : hsla(96, 10%, 10%, 1);
       --color-2-darker  : hsla(96, 10%, 1%, 1);
   
-      --color-3-light: hsl(230, 26%, 27%);
-      --color-3-dark : hsl(231, 100%, 9%);
+      --color-3-lighter : hsl(230, 26%, 40%);
+      --color-3-light   : hsl(230, 26%, 27%);
+      --color-3-dark    : hsl(231, 100%, 9%);
   
     /* feedback colors
      * color-error(#ffd1d2), color-success(#c8e675), 
@@ -1642,11 +1643,11 @@ ul.disc li::before {
 
 dt {
     margin: 0;
-    color : var(--color-1);
+    color : var(--color-3-lighter);
 }
 
 dt strong {
-    color: var(--color-1);
+    color: var(--color-3-lighter);
 }
 
 dd {
@@ -2866,7 +2867,6 @@ td:last-child {
  * ------------------------------------------------------------------- */
 .grid-list-items {
     --gap                : calc(var(--gutter) * 2);
-    --min-width          : 300px;
     display              : grid;
     grid-template-columns: repeat(auto-fit, minmax(min(var(--min-width), 100%), 1fr));
     -moz-column-gap      : var(--gap);
@@ -3799,6 +3799,7 @@ td:last-child {
 }
 
 .s-about__list li {
+    color: var(--color-3-lighter);
     font-weight  : 500;
     margin-bottom: var(--vspace-0_625);
     padding-left : 0;
