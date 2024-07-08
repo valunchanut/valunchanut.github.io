@@ -113,7 +113,7 @@
       --color-2-dark    : hsla(96, 10%, 10%, 1);
       --color-2-darker  : hsla(96, 10%, 1%, 1);
   
-      --color-3-lighter : hsl(230, 26%, 40%);
+      --color-3-lighter : rgb(75, 84, 129);
       --color-3-light   : hsl(230, 26%, 27%);
       --color-3-dark    : hsl(231, 100%, 9%);
   
