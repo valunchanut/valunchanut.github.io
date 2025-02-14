@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Rose Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #ffe4e1; }
+        .container { max-width: 600px; margin: 50px auto; background: white; padding: 20px; border-radius: 10px; }
+        .hidden { display: none; }
+        button { padding: 10px 15px; margin: 10px; background: pink; border: none; cursor: pointer; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🌹 Valentine's Day Rose Quiz 🌹</h1>
+        
+        <div id="start">
+            <p>What is your name?</p>
+            <input type="text" id="playerName" placeholder="Your Name">
+            <button onclick="startQuiz()">Start</button>
+        </div>
+        
+        <div id="quiz" class="hidden">
+            <h2>Question <span id="questionNum">1</span>/12</h2>
+            <p id="questionText"></p>
+            <div id="answers"></div>
+        </div>
+        
+        <div id="result" class="hidden">
+            <h2>The result is in...</h2>
+            <p id="finalMessage"></p>
+            <p id="roseResult"></p>
+            <p id="roseDescription"></p>
+            <img id="roseImage" src="" alt="Rose" style="width:500px;height:500px;">
+            <p id="roseCompatibility"></p>
+            <button onclick="location.reload()">Try Again</button>
+            
+            <!-- WIP Sharing and Saving as Picture
+            <button onclick="saveAsPicture()">Save as Picture</button>
+            <button onclick="shareResult('twitter')">Share on Twitter</button>
+            <button onclick="shareResult('facebook')">Share on Facebook</button>
+            <button onclick="shareResult('text')">Share via Text</button>
+            <button onclick="shareResult('email')">Share via Email</button> -->
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { text: "What is your ideal Valentine's Day?", options: { "Beach getaway": "Lavender", "Candlelight dinner": "Red", "Theme park adventure": "Rainbow", "Casual hangout": "Yellow", "Cozy night in with movies": "White", "Traveling abroad": "Blue" } },
+            { text: "What is your love language?", options: { "Gift-giving": "Pink", "Words of affirmation": "White", "Acts of service": "Orange", "Physical touch": "Red", "Quality time": "Lavender", "Shared experiences": "Blue" } },
+            { text: "What is your drink of choice?", options: { "Classic red wine": "Red", "Sweet bubble tea": "Pink", "Whiskey, neat": "Black", "Refreshing lemonade": "Yellow", "Exotic herbal tea": "Lavender", "Italian Soda": "Rainbow" } },
+            { text: "Which best describes your personality?", options: { "Mysterious & unique": "Blue", "Dramatic & rebellious": "Black", "Happy-go-lucky": "Yellow", "Passionate & energetic": "Orange", "Romantic & Gentle": "Pink", "Deep thinker": "Lavender" } },
+            { text: "If you had a magical ability, what would it be?", options: { "Seeing the future": "Lavender", "Creating fire": "Orange", "Invisibility": "Black", "Spreading happiness": "Pink", "Healing others": "White", "Teleportation": "Blue" } },
+            { text: "Which pet would you love?", options: { "A magical unicorn": "Lavender", "A loyal dog": "Pink", "A colorful parrot": "Rainbow", "A clever fox": "Blue", "A graceful cat": "Black", "A majestic horse": "White" } },
+            { text: "What's your ideal Valentine's gift?", options: { "Something meaningful": "Red", "Tons of chocolates": "Pink", "An exciting adventure": "Orange", "A heartfelt letter": "White", "A beautiful bouquet of flowers": "Lavender", "A custom-made surprise": "Blue" } },
+            { text: "How do you handle challenges?", options: { "Think carefully": "Blue", "Push forward!": "Red", "Laugh it off": "Yellow", "Go against the storm": "Black", "Stay calm and collected": "White", "Seek advice from others": "Lavender" } },
+            { text: "What's your dream date setting?", options: { "Under the stars": "Lavender", "Fancy restaurant": "Red", "Amusement park": "Rainbow", "Picnic in nature": "White", "A cozy coffee shop": "Pink", "A rooftop dinner": "Blue" } },
+            { text: "Which quote resonates with you?", options: { "Love deeply, laugh often": "Red", "Not all who wander are lost": "Blue", "Be yourself": "Rainbow", "I'd rather be hated for who I am": "Black", "Kindness is a language everyone understands": "White", "Dream big and never give up": "Lavender" } },
+            { text: "What describes your ideal relationship?", options: { "Passionate and fiery": "Red", "Comfortable and supportive": "Pink", "Exciting and unpredictable": "Orange", "Deep and mysterious": "Blue", "Fun and lighthearted": "Yellow", "Pure and wholesome": "White" } },
+            { text: "What is your biggest priority in life?", options: { "Love and intimacy": "Red", "Personal growth": "Lavender", "Success and ambition": "Blue", "Fun and adventure": "Orange", "Happiness and positivity": "Yellow", "Family and traditions": "White" } }
+        ];
+
+        let currentQuestion = 0;
+        let scores = {};
+        
+        function startQuiz() {
+            let name = document.getElementById("playerName").value.trim();
+            
+            if (name === "GrieferOne") {
+                showSpecialResult(name, "Exploding");
+                return;
+            }
+            
+            if (name === "LuffyCat") {
+                showSpecialResult(name, "Catnip");
+                return;
+            }
+
+            document.getElementById("start").classList.add("hidden");
+            document.getElementById("quiz").classList.remove("hidden");
+            showQuestion();
+        }
+
+        function showSpecialResult(name, roseType) {
+            document.getElementById("start").classList.add("hidden");
+            document.getElementById("quiz").classList.add("hidden");
+            document.getElementById("finalMessage").textContent = `${name}, your rose is the ${roseType} Rose 🌹`;
+            document.getElementById("roseResult").textContent = roseDescriptions[roseType].description.split(" - ")[0];
+            document.getElementById("roseDescription").textContent = roseDescriptions[roseType].description.split(" - ")[1];
+            document.getElementById("roseImage").src = roseDescriptions[roseType].image;
+            document.getElementById("roseCompatibility").textContent = roseDescriptions[roseType].compatible;
+            document.getElementById("result").classList.remove("hidden");
+        }
+        
+        function showQuestion() {
+            if (currentQuestion >= questions.length) return showFinalResult();
+            
+            let q = questions[currentQuestion];
+            document.getElementById("questionNum").textContent = currentQuestion + 1;
+            document.getElementById("questionText").textContent = q.text;
+            let answerDiv = document.getElementById("answers");
+            answerDiv.innerHTML = "";
+            
+            for (let [answer, rose] of Object.entries(q.options)) {
+                let btn = document.createElement("button");
+                btn.textContent = answer;
+                btn.onclick = () => { scores[rose] = (scores[rose] || 0) + 1; nextQuestion(); };
+                answerDiv.appendChild(btn);
+            }
+        }
+        
+        function nextQuestion() {
+            currentQuestion++;
+            showQuestion();
+        }
+        
+        function showFinalResult() {
+            document.getElementById("quiz").classList.add("hidden");
+            let playerName = document.getElementById("playerName").value.trim();
+            let bestRose = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            document.getElementById("finalMessage").textContent = `${playerName}, your rose is the ${bestRose} Rose 🌹`;
+            document.getElementById("roseResult").textContent = roseDescriptions[bestRose].description.split(" - ")[0];
+            document.getElementById("roseDescription").textContent = roseDescriptions[bestRose].description.split(" - ")[1];
+            document.getElementById("roseImage").src = roseDescriptions[bestRose].image;
+            document.getElementById("roseCompatibility").textContent = roseDescriptions[bestRose].compatible;
+            document.getElementById("result").classList.remove("hidden");
+        }
+
+        // WIP Sharing and Saving as Picture
+        // function shareResult(platform) {
+        //     let playerName = document.getElementById("playerName").value.trim();
+        //     let finalMessage = document.getElementById("finalMessage").textContent;
+        //     let roseResult = document.getElementById("roseResult").textContent;
+        //     let roseDescription = document.getElementById("roseDescription").textContent;
+        //     let shareText = 'My rose is the ${roseResult} Rose 🌹! ${roseDescription}';
+        //     let shareUrl = '';
+
+        //     switch(platform) {
+        //         case 'twitter':
+        //             shareUrl = 'https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}';
+        //             break;
+        //         case 'facebook':
+        //             shareUrl = 'https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(shareText)}';
+        //             break;
+        //         case 'text':
+        //             shareUrl = 'sms:?body=${encodeURIComponent(shareText)}';
+        //             break;
+        //         case 'email':
+        //             shareUrl = 'mailto:?subject=Valentine\'s Day Rose Quiz Result&body=${encodeURIComponent(shareText)}';
+        //             break;
+        //     }
+
+        //     window.open(shareUrl, '_blank');
+        // }
+        
+        const roseDescriptions = {
+            "Red": { description: "❤️ Red Rose - You are passionate, romantic, and deeply emotional. You wear your heart on your sleeve and love intensely. Your relationships are filled with warmth and devotion.", image: "img/red.png", compatible: "Best with Pink 🩷 and White 🤍 Roses." },
+            "Pink": { description: "🩷 Pink Rose - You are sweet, caring, and affectionate. You bring joy and comfort to those around you. Your kindness and appreciation make you a wonderful friend and partner.", image: "img/pink.png", compatible: "Best with Red ❤️ and Lavender 💜 Roses." },
+            "White": { description: "🤍 White Rose - You symbolize purity, sincerity, and new beginnings. You have a calm and peaceful nature, and you cherish meaningful connections with people you trust.", image: "img/white.png", compatible: "Best with Red ❤️ and Blue 💙 Roses." },
+            "Yellow": { description: "💛 Yellow Rose - You radiate happiness, friendship, and positivity. You love bringing laughter and joy to others, and your cheerful personality makes you a delight to be around.", image: "img/yellow.png", compatible: "Best with Orange 🧡 and Rainbow 🌈 Roses." },
+            "Orange": { description: "🧡 Orange Rose - You are full of energy, enthusiasm, and adventure. You are always seeking excitement and live life with an open heart, inspiring those around you.", image: "img/orange.png", compatible: "Best with Yellow 💛 and Black 🖤 Roses." },
+            "Blue": { description: "💙 Blue Rose - You are unique, mysterious, and intriguing. People are drawn to your depth and complexity, and you have a way of seeing the world from a different perspective.", image: "img/blue.png", compatible: "Best with White 🤍 and Lavender 💜 Roses." },
+            "Black": { description: "🖤 Black Rose - You embrace the unconventional, deep emotions, and rebellion. You have a strong presence and an independent spirit that sets you apart from the crowd.", image: "img/black.png", compatible: "Best with Orange 🧡 and Blue 💙 Roses." },
+            "Lavender": { description: "💜 Lavender Rose - You are enchanting, dreamy, and full of wonder. Love at first sight is something you believe in, and your romantic nature makes you truly special.", image: "img/lavender.png", compatible: "Best with Pink 🩷 and Blue 💙 Roses." },
+            "Rainbow": { description: "🌈 Rainbow Rose - You are vibrant, creative, and full of life. Your playful personality and love for diversity make you a person who brings color and joy to every situation.", image: "img/rainbow.png", compatible: "Best with Yellow 💛 and White 🤍 Roses." },
+            "Exploding": { description: "💥 Exploding Rose - You are a meanie, you deserve all the bombs in the world. But I'm nice so here's a kiss😘", image: "img/explode.png", compatible: "Best with Horse Head in a box🐴." },
+            "Catnip": { description: "🐱 Catnip Rose - You are enchanting, dreamy, and full of wonder. Love at first sight is something you believe in, and your romantic nature makes you truly special.", image: "img/cat.png", compatible: "Best with cats🐱." },
+        };
+    </script>
+</body>
+</html>
