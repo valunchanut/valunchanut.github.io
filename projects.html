@@ -101,7 +101,6 @@
               <input type="checkbox" class="tag-filter" value="Mobile" id="tag-mobile"><label for="tag-mobile">Mobile App Dev</label>
             </div>
           </div>
-
           <div class="project-card" data-tags="Data-ana">
               <h3>Analyzing Unicorn Companies</h3>
               <p>Tech Stack: PostgresSQL(CTEs, JOINs, Aggregations)</p>
@@ -129,26 +128,52 @@
                 <li>Interactive frontend using React and Tailwind CSS for input, selection, and visualization</li>
                 <li>Full project documentation such as; project scope, team charter, personas, user stories, meeting minutes, and final presentation</li>
               </ul>
-              <p class="project-links">View project: <a href="#" target="_blank">GitHub</a> <a href="#" target="_blank">Presentation</a></p>
+              <p class="project-links">View project: <a href="project-files/ai-iims.pdf" target="_blank">Presentation</a></p>
               <p><span class="tag">Data Science</span> <span class="tag">AI</span> <span class="tag">ML</span> <span class="tag">Web Development</span> </p>
             </div>
 
-          <div id="projectsList">
-            <div class="project-card" data-tags="Data-sci Data-viz AI ML">
-              <h3 class="item-folio__title">Analyzing Yelp Reviews</h3>
-              <p class="tech-stack">Tech Stack: Python, Pandas, Scikit-learn, NLTK</p>
-              <p class="item-folio__cat">Sentiment classification using NLP and ML on Yelp restaurant reviews.</p>
-              <p class="project-links">Preview: <a href="#">GitHub</a> <a href="#">Live Demo</a></p>
-              <p><span class="tag">Data Science</span> <span class="tag">Data Visualization</span> <span class="tag">AI</span> <span class="tag">ML</span></p>
+            <div class="project-card" data-tags="Data-sci Data-viz AI ML NLP">
+              <h3>Analyzing Yelp Reviews</h3>
+              <p>Tech Stack: Python (Pandas, Scikit-learn, TfidfVectorizer, Naive Bayes), Seaborn, Matplotlib</p>
+              <p>This project applies natural language processing (NLP) to predict Yelp review ratings based on the text content. It uses TF-IDF for feature extraction and a Naive Bayes classifier for multi-class classification. Additional analysis includes user engagement based on “cool,” “useful,” and “funny” votes.</p>
+              
+              <p><strong>Key Insights:</strong></p>
+              <ul>
+                <li>The model performed best on 4-star and 5-star reviews, with limited success in predicting lower ratings.</li>
+                <li>Skewed distribution of reviews and class imbalance affected performance, with many reviews clustering at the higher end.</li>
+                <li>Text content alone may not be sufficient for fine-grained rating prediction; combining other features like business categories or review length could improve results.</li>
+              </ul>
+              
+              <p><strong>Deliverables:</strong></p>
+              <ul>
+                <li>Exploratory data analysis of Yelp reviews, rating distributions, and vote metrics</li>
+                <li>Preprocessed review text (lowercasing, stop word removal, TF-IDF transformation)</li>
+                <li>Naive Bayes classification pipeline trained on 5-star rating prediction</li>
+                <li>Model evaluation with confusion matrix and classification report with Weighted F1-score of 0.36</li>
+              </ul>
+              
+              <p class="project-links">View project: <a href="https://colab.research.google.com/drive/1Unw8kjgHrvPwJiCs-m7ZW9oVFNTedOZL?usp=sharing">Colab</a> <a href="https://www.youtube.com/watch?v=1M_sSuatSuU">Video Presentation</a></p>
+              <p><span class="tag">Data Science</span> <span class="tag">Data Visualization</span> <span class="tag">AI</span> <span class="tag">ML</span> <span class="tag">NLP</span></p>
             </div>
 
-            <div class="project-card" data-tags="AI">
-              <h3 class="item-folio__title">Ask TarotGPT</h3>
-              <p class="item-folio__cat">AI chatbot that delivers tarot readings using GPT-4 and themed prompts.</p>
-              <p class="tech-stack">ChatGPT API, JavaScript, HTML/CSS</p>
-              <p class="project-links">Preview: <a href="#">GitHub</a> <a href="#">Live Demo</a></p>
-              <p><span class="tag">AI</span> <span class="tag">Prompt Engineering</span></p>
+            <div class="project-card" data-tags="AI PromptEngineering">
+              <h3>Ask TarotGPT</h3>
+              <p>Tech Stack: ChatGPT API, Prompt Engineering, JavaScript (Prototype)</p>
+              <p>This project explores the use of GPT models to simulate tarot readings through refined prompt engineering. Ask TarotGPT generates structured 1-card, 3-card, and 5-card spreads tailored to user intentions, such as career, love, or self-reflection. The current version is prompt-based and optimized for consistency, tone, and symbolic interpretation.</p>
+              
+              <p><strong>Future Improvements:</strong></p>
+              <ul>
+                <li>Build a fully interactive web interface for card selection and spread visualization</li>
+                <li>Integrate session memory to personalize multi-question readings</li>
+                <li>Incorporate probabilistic spread generation using pseudo-random logic</li>
+                <li>Allow users to journal and revisit past readings via local browser storage</li>
+              </ul>
+
+              <p class="project-links">View project: <a href="https://chatgpt.com/g/g-2oLQ2WEdu-ask-tarotgpt">Try GPT</a> <a href="#">Live Demo</a>
+              </p>
+              <p><span class="tag">AI</span> <span class="tag">PromptEngineering</span></p>
             </div>
+
 
           </div>
         </div>
