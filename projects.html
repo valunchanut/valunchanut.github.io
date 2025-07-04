@@ -51,17 +51,11 @@
     }
 
     .project-card {
-      margin-bottom: 2rem;
-      padding: 1.5rem;
+      margin: 2rem;
+      padding: 2rem;
       border: 1px solid #ddd;
       border-radius: 8px;
       background-color: #fff;
-    }
-
-    .tech-stack {
-      font-style: italic;
-      margin: 0.5rem 0;
-      color: #666;
     }
 
     .project-links {
@@ -98,31 +92,54 @@
           <div class="search-filter">
             <input type="text" id="searchInput" placeholder="Search projects..." />
             <div class="tag-options">
-              <input type="checkbox" class="tag-filter" value="Data-an" id="tag-data-an"><label for="tag-data-an">Data Analysis</label>
+              <input type="checkbox" class="tag-filter" value="Data-ana" id="tag-data-ana"><label for="tag-data-ana">Data Analysis</label>
               <input type="checkbox" class="tag-filter" value="Data-sci" id="tag-data-sci"><label for="tag-data-sci">Data Science</label>
               <input type="checkbox" class="tag-filter" value="Data-viz" id="tag-data-viz"><label for="tag-data-viz">Data Visualization</label>
-              <input type="checkbox" class="tag-filter" value="Web" id="tag-web"><label for="tag-web">Web Development</label>
-              <input type="checkbox" class="tag-filter" value="Mobile" id="tag-mobile"><label for="tag-mobile">Mobile App Dev</label>
               <input type="checkbox" class="tag-filter" value="AI" id="tag-ai"><label for="tag-ai">AI</label>
               <input type="checkbox" class="tag-filter" value="ML" id="tag-ml"><label for="tag-ml">ML</label>
+              <input type="checkbox" class="tag-filter" value="Web" id="tag-web"><label for="tag-web">Web Development</label>
+              <input type="checkbox" class="tag-filter" value="Mobile" id="tag-mobile"><label for="tag-mobile">Mobile App Dev</label>
             </div>
           </div>
+
+          <div class="project-card" data-tags="Data-ana">
+              <h3>Analyzing Unicorn Companies</h3>
+              <p>Tech Stack: PostgresSQL(CTEs, JOINs, Aggregations)</p>
+              <p>This SQL analysis identifies the top 3 industries that produced the most unicorn startups between 2019 and 2021. The project uses multiple CTEs to filter and summarize data from a startup funding database, joining company, industry, and valuation tables.</p>
+              <p><strong>Key Insights:</strong></p>
+                <ul>
+                  <li>The top 3 industries with the most unicorns between 2019 and 2021 were consistently dominant in both count and valuation.</li>
+                  <li>2021 saw the highest spike in average unicorn valuation, suggesting a funding surge during the pandemic rebound.</li>
+                  <li>Some industries had fewer unicorns but significantly higher average valuations, pointing to high investor confidence in specific sectors.</li>
+                </ul>
+              <p class="project-links">View project: <a href="https://www.datacamp.com/datalab/w/35ac66a4-60f5-4f6a-9586-07fc5ed43209/edit">Datalab</a></p>
+              <p><span class="tag">Data Analysis</span></p>
+            </div>
+
+            <div class="project-card" data-tags="Data-sci AI ML Web">
+              <h3>AI Integrated Inventory Management System (AI-IIMS)</h3>
+              <p>Tech Stack: Python (Pandas, Prophet, FastAPI), Next.js, React.js, Tailwind CSS, Git/GitHub</p>
+              <p>AI-IIMS is a full-stack inventory forecasting solution developed in Agile sprints. The system forecasts demand for ingredients by analyzing historical sales data at the menu item level and translating those forecasts into ingredient quantities based on each recipe.</p>
+              <p><strong>Deliverables:</strong></p>
+              <ul>
+                <li>Data ingestion and cleaning pipeline using Python and OpenPyXL</li>
+                <li>Forecasting engine using Prophet to predict daily demand for menu items and required ingredients</li>
+                <li>Recipe-to-ingredient mapping logic to calculate daily ingredient usage</li>
+                <li>RESTful API with FastAPI to handle user queries and serve predictions to the frontend</li>
+                <li>Interactive frontend using React and Tailwind CSS for input, selection, and visualization</li>
+                <li>Full project documentation such as; project scope, team charter, personas, user stories, meeting minutes, and final presentation</li>
+              </ul>
+              <p class="project-links">View project: <a href="#" target="_blank">GitHub</a> <a href="#" target="_blank">Presentation</a></p>
+              <p><span class="tag">Data Science</span> <span class="tag">AI</span> <span class="tag">ML</span> <span class="tag">Web Development</span> </p>
+            </div>
 
           <div id="projectsList">
             <div class="project-card" data-tags="Data-sci Data-viz AI ML">
               <h3 class="item-folio__title">Analyzing Yelp Reviews</h3>
-              <p class="item-folio__cat">Sentiment classification using NLP and ML on Yelp restaurant reviews.</p>
               <p class="tech-stack">Tech Stack: Python, Pandas, Scikit-learn, NLTK</p>
+              <p class="item-folio__cat">Sentiment classification using NLP and ML on Yelp restaurant reviews.</p>
               <p class="project-links">Preview: <a href="#">GitHub</a> <a href="#">Live Demo</a></p>
               <p><span class="tag">Data Science</span> <span class="tag">Data Visualization</span> <span class="tag">AI</span> <span class="tag">ML</span></p>
-            </div>
-
-            <div class="project-card" data-tags="Data-sci Web AI ML">
-              <h3 class="item-folio__title">AI Integrated Inventory Management System</h3>
-              <p class="item-folio__cat">Sales forecasting and inventory insights for small retailers.</p>
-              <p class="tech-stack">Tech Stack: Python, Prophet, FastAPI, JavaScript, HTML/CSS</p>
-              <p class="project-links">Preview: <a href="#">GitHub</a> <a href="#">Live Demo</a></p>
-              <p><span class="tag">Web</span> <span class="tag">Data</span></p>
             </div>
 
             <div class="project-card" data-tags="AI">
@@ -133,13 +150,6 @@
               <p><span class="tag">AI</span> <span class="tag">Prompt Engineering</span></p>
             </div>
 
-            <div class="project-card" data-tags="Web Mobile">
-              <h3 class="item-folio__title">Thai Restaurant Web App</h3>
-              <p class="item-folio__cat">Ordering platform with mobile-first design for Thai food delivery.</p>
-              <p class="tech-stack">Tech Stack: React, Node.js, MongoDB, Express</p>
-              <p class="project-links">Preview: <a href="#">GitHub</a> <a href="#">Live Demo</a></p>
-              <p><span class="tag">Web</span> <span class="tag">Mobile</span></p>
-            </div>
           </div>
         </div>
       </div>
