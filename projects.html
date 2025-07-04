@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All Projects - Val Simaroj</title>
+  <link rel="stylesheet" href="css/vendor.css">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .tag-options {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag-options input[type="checkbox"] {
+      display: none;
+    }
+
+    .tag-options label {
+      display: inline-block;
+      padding: 0.3rem 0.7rem;
+      margin: 0.2rem 0.4rem 0.2rem 0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      background-color: #f5f5f5;
+      color: #111;
+      cursor: pointer;
+      font-size: 90%;
+      transition: all 0.2s ease;
+    }
+
+    .tag-options input[type="checkbox"]:checked + label {
+      background-color: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .search-filter {
+      margin-bottom: 2rem;
+    }
+
+    .project-card {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+
+    .tech-stack {
+      font-style: italic;
+      margin: 0.5rem 0;
+      color: #666;
+    }
+
+    .project-links {
+      margin-top: 0.5rem;
+    }
+
+    .project-links a {
+      margin-right: 10px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin: 0.2rem 0.4rem 0.2rem 0;
+      background-color: #f5f5f5;
+      font-size: 90%;
+    }
+  </style>
+</head>
+<body id="top">
+  <section class="s-portfolio target-section">
+    <div class="container">
+      <div class="row section-header has-bottom-sep">
+        <div class="col-full">
+          <h1 class="display-1">All Projects Showcase</h1>
+          <a href="index.html" class="btn btn--stroke">← Home</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-full">
+          <div class="search-filter">
+            <input type="text" id="searchInput" placeholder="Search projects..." />
+            <div class="tag-options">
+              <input type="checkbox" class="tag-filter" value="Data-an" id="tag-data-an"><label for="tag-data-an">Data Analysis</label>
+              <input type="checkbox" class="tag-filter" value="Data-sci" id="tag-data-sci"><label for="tag-data-sci">Data Science</label>
+              <input type="checkbox" class="tag-filter" value="Data-viz" id="tag-data-viz"><label for="tag-data-viz">Data Visualization</label>
+              <input type="checkbox" class="tag-filter" value="Web" id="tag-web"><label for="tag-web">Web Development</label>
+              <input type="checkbox" class="tag-filter" value="Mobile" id="tag-mobile"><label for="tag-mobile">Mobile App Dev</label>
+              <input type="checkbox" class="tag-filter" value="AI" id="tag-ai"><label for="tag-ai">AI</label>
+              <input type="checkbox" class="tag-filter" value="ML" id="tag-ml"><label for="tag-ml">ML</label>
+            </div>
+          </div>
+
+          <div id="projectsList">
+            <div class="project-card" data-tags="Data-sci Data-viz AI ML">
+              <h3 class="item-folio__title">Analyzing Yelp Reviews</h3>
+              <p class="item-folio__cat">Sentiment classification using NLP and ML on Yelp restaurant reviews.</p>
+              <p class="tech-stack">Tech Stack: Python, Pandas, Scikit-learn, NLTK</p>
+              <p class="project-links">Preview:
+                <a href="#">GitHub</a>
+                <a href="#">Live Demo</a>
+              </p>
+              <p><span class="tag">Data Science</span> <span class="tag">Data Visualization</span> <span class="tag">AI</span> <span class="tag">ML</span></p>
+            </div>
+
+            <div class="project-card" data-tags="Web Data">
+              <h3 class="item-folio__title">AI Integrated Inventory Management System</h3>
+              <p class="item-folio__cat">Sales forecasting and inventory insights for small retailers.</p>
+              <p class="tech-stack">Python, Prophet, FastAPI, JavaScript, HTML/CSS</p>
+              <div class="project-links">
+                <a href="#" class="btn btn--small">GitHub</a>
+                <a href="#" class="btn btn--small">Presentation</a>
+              </div>
+              <p><span class="tag">Web</span> <span class="tag">Data</span></p>
+            </div>
+
+            <div class="project-card" data-tags="AI PromptEngineering">
+              <h3 class="item-folio__title">Ask TarotGPT</h3>
+              <p class="item-folio__cat">AI chatbot that delivers tarot readings using GPT-4 and themed prompts.</p>
+              <p class="tech-stack">ChatGPT API, JavaScript, HTML/CSS</p>
+              <div class="project-links">
+                <a href="#" class="btn btn--small">GitHub</a>
+                <a href="#" class="btn btn--small">Try It</a>
+              </div>
+              <p><span class="tag">AI</span> <span class="tag">PromptEngineering</span></p>
+            </div>
+
+            <div class="project-card" data-tags="Web Mobile">
+              <h3 class="item-folio__title">Thai Restaurant Web App</h3>
+              <p class="item-folio__cat">Ordering platform with mobile-first design for Thai food delivery.</p>
+              <p class="tech-stack">Tech Stack: React, Node.js, MongoDB, Express</p>
+              <div class="project-links">
+                <a href="#" class="btn btn--small">GitHub</a>
+                <a href="#" class="btn btn--small">Live Site</a>
+              </div>
+              <p><span class="tag">Web</span> <span class="tag">Mobile</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const tagFilters = document.querySelectorAll('.tag-filter');
+
+    function filterProjects() {
+      const query = searchInput.value.toLowerCase();
+      const activeTags = Array.from(tagFilters)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value.toLowerCase());
+
+      const projectCards = document.querySelectorAll('.project-card');
+
+      projectCards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const tags = card.dataset.tags.toLowerCase().split(' ');
+
+        const matchesQuery = title.includes(query);
+        const matchesTags = activeTags.length === 0 || activeTags.every(tag => tags.includes(tag));
+
+        card.classList.toggle('hidden', !(matchesQuery && matchesTags));
+      });
+    }
+
+    searchInput.addEventListener('input', filterProjects);
+    tagFilters.forEach(cb => cb.addEventListener('change', filterProjects));
+  </script>
+</body>
+</html>
