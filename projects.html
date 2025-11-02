@@ -90,18 +90,43 @@
       <div class="row">
         <div class="col-full">
           <div class="search-filter">
-            <input type="text" id="searchInput" placeholder="Search projects..." />
-            <div class="tag-options">
-              <input type="checkbox" class="tag-filter" value="Data-ana" id="tag-data-ana"><label for="tag-data-ana">Data Analysis</label>
-              <input type="checkbox" class="tag-filter" value="Data-sci" id="tag-data-sci"><label for="tag-data-sci">Data Science</label>
-              <input type="checkbox" class="tag-filter" value="Data-viz" id="tag-data-viz"><label for="tag-data-viz">Data Visualization</label>
-              <input type="checkbox" class="tag-filter" value="AI" id="tag-ai"><label for="tag-ai">AI</label>
-              <input type="checkbox" class="tag-filter" value="ML" id="tag-ml"><label for="tag-ml">ML</label>
-              <input type="checkbox" class="tag-filter" value="Web" id="tag-web"><label for="tag-web">Web Development</label>
-              <input type="checkbox" class="tag-filter" value="Mobile" id="tag-mobile"><label for="tag-mobile">Mobile App Dev</label>
-            </div>
-          </div>
-          <div class="project-card" data-tags="Data-ana">
+              <!-- Search and Sort (First Row) -->
+              <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                <input type="text" id="searchInput" placeholder="Search projects..." style="flex: 1; min-width: 250px;" />
+                <select id="sortSelect" class="btn btn--small">
+                  <option value="">Sort by</option>
+                  <option value="title-asc">Title A–Z</option>
+                  <option value="title-desc">Title Z–A</option>
+                  <option value="updated-asc">Oldest Updated</option>
+                  <option value="updated-desc">Recently Updated</option>
+                </select>
+              </div>
+
+              <!-- Category Tags -->
+              <div class="tag-options">
+                <input type="checkbox" class="tag-filter" value="Data-ana" id="tag-data-ana"><label for="tag-data-ana">Data Analysis</label>
+                <input type="checkbox" class="tag-filter" value="Data-sci" id="tag-data-sci"><label for="tag-data-sci">Data Science</label>
+                <input type="checkbox" class="tag-filter" value="Data-viz" id="tag-data-viz"><label for="tag-data-viz">Data Visualization</label>
+                <input type="checkbox" class="tag-filter" value="AI" id="tag-ai"><label for="tag-ai">AI</label>
+                <input type="checkbox" class="tag-filter" value="ML" id="tag-ml"><label for="tag-ml">ML</label>
+                <input type="checkbox" class="tag-filter" value="Web" id="tag-web"><label for="tag-web">Web Development</label>
+                <input type="checkbox" class="tag-filter" value="Mobile" id="tag-mobile"><label for="tag-mobile">Mobile App Dev</label>
+                <input type="checkbox" class="tag-filter" value="Software" id="tag-software"><label for="tag-software">Software Dev</label>
+              </div>
+
+              <!-- Tech Stack / Tool Filters -->
+              <div class="tag-options">
+                <input type="checkbox" class="tool-filter" value="Python" id="tool-python"><label for="tool-python">Python</label>
+                <input type="checkbox" class="tool-filter" value="PostgreSQL" id="tool-postgresql"><label for="tool-postgresql">PostgreSQL</label>
+                <input type="checkbox" class="tool-filter" value="Tableau" id="tool-tableau"><label for="tool-tableau">Tableau</label>
+                <input type="checkbox" class="tool-filter" value="FastAPI" id="tool-fastapi"><label for="tool-fastapi">FastAPI</label>
+                <input type="checkbox" class="tool-filter" value="React" id="tool-react"><label for="tool-react">React</label>
+                <input type="checkbox" class="tool-filter" value="Tailwind" id="tool-tailwind"><label for="tool-tailwind">Tailwind</label>
+                <input type="checkbox" class="tool-filter" value="Scikit-learn" id="tool-sklearn"><label for="tool-sklearn">Scikit-learn</label>
+                <input type="checkbox" class="tool-filter" value="Next.js" id="tool-nextjs"><label for="tool-nextjs">Next.js</label>
+              </div>
+
+          <div class="project-card" data-tags="Data-ana" data-tools="SQL" data-updated="2025-04-19">
               <h3>Analyzing Unicorn Companies</h3>
               <p>Tech Stack: PostgreSQL(CTEs, JOINs, Aggregations)</p>
               <p>This SQL analysis identifies the top 3 industries that produced the most unicorn startups between 2019 and 2021. The project uses multiple CTEs to filter and summarize data from a startup funding database, joining company, industry, and valuation tables.</p>
@@ -115,9 +140,9 @@
               <p><span class="tag">Data Analysis</span></p>
             </div>
 
-            <div class="project-card" data-tags="Data-viz Data-ana">
+            <div class="project-card" data-tags="Data-viz Data-ana" data-tools="Tableau" data-updated="2025-03-15">
               <h3>Case Study: HR Analytics in Tableau</h3>
-              <p>Tech Stack: Tableau, Excel</p>
+              <p>Tech Stack: Tableau</p>
               <p>This case study explores key HR metrics to identify patterns in employee attrition, engagement, and performance. The project involved cleaning HR data, designing dashboards, and presenting actionable insights to support HR decision-making.</p>
               <p class="project-links">View project: 
                 <a href="#">Video</a> 
@@ -126,9 +151,9 @@
             </div>
 
 
-            <div class="project-card" data-tags="Data-sci AI ML Web">
+            <div class="project-card" data-tags="Data-sci AI ML Web" data-tools="Python JS HTML CSS Git" data-updated="2024-04-15">
               <h3>AI Integrated Inventory Management System (AI-IIMS)</h3>
-              <p>Tech Stack: Python (Pandas, Prophet, FastAPI), Next.js, React.js, Tailwind CSS, Git/GitHub</p>
+              <p>Tech Stack: Python (Pandas, Prophet, FastAPI), JavaScript, Next.js, React.js, HTML, Tailwind CSS, Git/GitHub</p>
               <p>AI-IIMS is a full-stack inventory forecasting solution developed in Agile sprints. The system forecasts demand for ingredients by analyzing historical sales data at the menu item level and translating those forecasts into ingredient quantities based on each recipe.</p>
               <p><strong>Deliverables:</strong></p>
               <ul>
@@ -143,7 +168,7 @@
               <p><span class="tag">Data Science</span> <span class="tag">AI</span> <span class="tag">ML</span> <span class="tag">Web Development</span> </p>
             </div>
 
-            <div class="project-card" data-tags="Data-sci Data-viz AI ML NLP">
+            <div class="project-card" data-tags="Data-sci Data-viz AI ML NLP" data-tools="Python Seaborn Matplotlib" data-updated="2024-07-02">
               <h3>Analyzing Yelp Reviews</h3>
               <p>Tech Stack: Python (Pandas, Scikit-learn, TfidfVectorizer, Naive Bayes), Seaborn, Matplotlib</p>
               <p>This project applies natural language processing (NLP) to predict Yelp review ratings based on the text content. It uses TF-IDF for feature extraction and a Naive Bayes classifier for multi-class classification. Additional analysis includes user engagement based on “cool,” “useful,” and “funny” votes.</p>
@@ -167,7 +192,7 @@
               <p><span class="tag">Data Science</span> <span class="tag">Data Visualization</span> <span class="tag">AI</span> <span class="tag">ML</span> <span class="tag">NLP</span></p>
             </div>
 
-            <div class="project-card" data-tags="AI PromptEngineering">
+            <div class="project-card" data-tags="AI PromptEngineering" data-tools="ChatGPT" data-updated="2024-10-27">
               <h3>Ask TarotGPT</h3>
               <p>Tech Stack: ChatGPT API, Prompt Engineering, JavaScript (Prototype)</p>
               <p>This project explores the use of GPT models to simulate tarot readings through refined prompt engineering. Ask TarotGPT generates structured 1-card, 3-card, and 5-card spreads tailored to user intentions, such as career, love, or self-reflection. The current version is prompt-based and optimized for consistency, tone, and symbolic interpretation.</p>
@@ -192,31 +217,10 @@
     </div>
   </section>
 
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const tagFilters = document.querySelectorAll('.tag-filter');
-
-    function filterProjects() {
-      const query = searchInput.value.toLowerCase();
-      const activeTags = Array.from(tagFilters)
-        .filter(cb => cb.checked)
-        .map(cb => cb.value.toLowerCase());
-
-      const projectCards = document.querySelectorAll('.project-card');
-
-      projectCards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const tags = card.dataset.tags.toLowerCase().split(' ');
-
-        const matchesQuery = title.includes(query);
-        const matchesTags = activeTags.length === 0 || activeTags.every(tag => tags.includes(tag));
-
-        card.classList.toggle('hidden', !(matchesQuery && matchesTags));
-      });
-    }
-
-    searchInput.addEventListener('input', filterProjects);
-    tagFilters.forEach(cb => cb.addEventListener('change', filterProjects));
+  <script type="module">
+    import { setupProjectFilter } from 'js/projects-filter.js';
+    setupProjectFilter();
   </script>
+
 </body>
 </html>
