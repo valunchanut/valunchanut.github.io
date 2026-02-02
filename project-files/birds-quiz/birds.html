@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4 Birds Personality Quiz</title>
+
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background-color: lightblue; }
+    .container { max-width: 700px; margin: 50px auto; background: white; padding: 20px; border-radius: 10px; }
+    .hidden { display: none; }
+    button { padding: 10px 15px; margin: 10px; background: skyblue; border: none; cursor: pointer; border-radius: 8px; }
+    #answers button { display: block; width: 100%; max-width: 520px; margin: 10px auto; }
+    canvas { max-width: 520px; margin: 20px auto; }
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- Pie chart library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>4 Birds Personality Quiz</h1>
+
+    <div id="start">
+      <p>What is your name?</p>
+      <input type="text" id="playerName" placeholder="Your Name" />
+      <button onclick="startQuiz()">Start</button>
+    </div>
+
+    <div id="quiz" class="hidden">
+      <h2>Question <span id="questionNum">1</span>/12</h2>
+      <p id="questionText"></p>
+      <div id="answers"></div>
+    </div>
+
+    <div id="result" class="hidden">
+      <h2>Your main bird is...</h2>
+      <p id="finalMessage"></p>
+
+      <p id="birdResult"></p>
+      <p id="birdDescription"></p>
+      <img id="birdImage" src="" alt="Bird" style="width: 420px; height: 420px; object-fit: contain;" />
+
+      <!-- NEW: Pie chart -->
+      <h3>Your Bird Mix</h3>
+      <canvas id="birdChart" width="520" height="520"></canvas>
+
+      <!-- NEW: Text breakdown (accessible + nice to read) -->
+      <p id="otherBirds"></p>
+
+      <button onclick="location.reload()">Try Again</button>
+
+      <!-- WIP Sharing and Saving as Picture
+      <button onclick="saveAsPicture()">Save as Picture</button> -->
+    </div>
+  </div>
+
+    <script>
+        const questions = [
+        {
+            text: "In a group project, I like to:",
+            options: {
+            "Take charge and lead": "Eagle",
+            "Plan carefully and check details": "Owl",
+            "Make sure everyone feels included": "Dove",
+            "Share ideas and encourage others": "Rooster"
+            }
+        },
+        {
+            text: "When making decisions, I prefer to:",
+            options: {
+            "Decide quickly": "Eagle",
+            "Think carefully before deciding": "Owl",
+            "Check how others feel": "Dove",
+            "Go with what feels exciting": "Rooster"
+            }
+        },
+        {
+            text: "People often describe me as:",
+            options: {
+            "Confident": "Eagle",
+            "Careful": "Owl",
+            "Kind": "Dove",
+            "Outgoing": "Rooster"
+            }
+        },
+        {
+            text: "When plans change, I usually:",
+            options: {
+            "Take control and adapt": "Eagle",
+            "Re-plan carefully": "Owl",
+            "Adjust calmly": "Dove",
+            "Try something new and see how it goes": "Rooster"
+            }
+        },
+        {
+            text: "In class or at work, I tend to:",
+            options: {
+            "Speak up and lead": "Eagle",
+            "Focus on accuracy": "Owl",
+            "Help others": "Dove",
+            "Make things engaging": "Rooster"
+            }
+        },
+        {
+            text: "I get frustrated when:",
+            options: {
+            "Things move too slowly": "Eagle",
+            "Information is unclear": "Owl",
+            "People are tense": "Dove",
+            "Things feel boring": "Rooster"
+            }
+        },
+        {
+            text: "I feel most successful when:",
+            options: {
+            "I reach goals": "Eagle",
+            "I do things correctly": "Owl",
+            "People feel supported": "Dove",
+            "I feel energized": "Rooster"
+            }
+        },
+        {
+            text: "Under pressure, I usually:",
+            options: {
+            "Push forward": "Eagle",
+            "Stay logical": "Owl",
+            "Stay calm": "Dove",
+            "Stay positive": "Rooster"
+            }
+        },
+        {
+            text: "I prefer working:",
+            options: {
+            "Independently": "Eagle",
+            "With structure": "Owl",
+            "With a team": "Dove",
+            "In a lively setting": "Rooster"
+            }
+        },
+        {
+            text: "One of my strengths is:",
+            options: {
+            "Leadership": "Eagle",
+            "Accuracy": "Owl",
+            "Empathy": "Dove",
+            "Creativity": "Rooster"
+            }
+        },
+        {
+            text: "When communicating with others, I usually:",
+            options: {
+            "Get straight to the point": "Eagle",
+            "Explain things carefully and clearly": "Owl",
+            "Choose my words thoughtfully": "Dove",
+            "Speak openly and express ideas easily": "Rooster"
+            }
+        },
+        {
+            text: "When there is disagreement or feedback, I tend to:",
+            options: {
+            "Address it directly": "Eagle",
+            "Think it through before responding": "Owl",
+            "Try to keep things calm": "Dove",
+            "Use humor or positivity to move forward": "Rooster"
+            }
+        }
+        ];
+
+
+    const birdDescriptions = {
+    "Owl": {
+        title: "🦉 Owl (Compliant)",
+        tagline: "Like to ask | Reserved",
+        strengths: [
+        "Wise, analytical, and precise",
+        "Methodical, organized, and detail-focused",
+        "Perseveres and maintains structure"
+        ],
+        cautions: [
+        "May take longer to decide",
+        "Can be inflexible and risk-averse"
+        ],
+        image: "img/owl.jpg"
+    },
+    "Eagle": {
+        title: "🦅 Eagle (Dominant)",
+        tagline: "Like to tell | Reserved",
+        strengths: [
+        "Bold and confident leaders",
+        "Decisive and goal-focused",
+        "Thrive in structured, high-performing environments"
+        ],
+        cautions: [
+        "Can be impatient or overly controlling",
+        "May overlook others’ needs"
+        ],
+        image: "img/eag.jpg"
+    },
+    "Rooster": {
+        title: "🐓 Rooster (Influential)",
+        tagline: "Like to tell | Outgoing",
+        strengths: [
+        "Energetic and enthusiastic",
+        "Cheerful and optimistic",
+        "Loves talking and sharing ideas"
+        ],
+        cautions: [
+        "Can be inattentive or impatient",
+        "Struggles with time management and detail focus"
+        ],
+        image: "img/roo.jpg"
+    },
+    "Dove": {
+        title: "🕊️ Dove (Supportive)",
+        tagline: "Like to ask | Outgoing",
+        strengths: [
+        "Peaceful, friendly, and supportive",
+        "Diplomatic and tactful",
+        "Good listeners and team players"
+        ],
+        cautions: [
+        "Avoids confrontation and risk-taking",
+        "Seeks affirmation"
+        ],
+        image: "img/dov.jpg"
+    }
+    };
+
+
+    const ALL_BIRDS = ["Eagle", "Owl", "Dove", "Rooster"];
+
+    let currentQuestion = 0;
+    let scores = {};
+    let birdChartInstance = null;
+
+    function startQuiz() {
+      let name = document.getElementById("playerName").value.trim();
+
+      document.getElementById("start").classList.add("hidden");
+      document.getElementById("quiz").classList.remove("hidden");
+      showQuestion();
+    }
+
+    // function showSpecialResult(name, birdType) {
+    //   document.getElementById("start").classList.add("hidden");
+    //   document.getElementById("quiz").classList.add("hidden");
+
+    //   document.getElementById("finalMessage").textContent = `${name}, your main bird is ${birdType}!`;
+    //   document.getElementById("birdResult").textContent = birdDescriptions[birdType].title;
+    //   document.getElementById("birdDescription").textContent = birdDescriptions[birdType].description;
+    //   document.getElementById("birdImage").src = birdDescriptions[birdType].image;
+
+    //   // Show 100% for that bird, 0% for others
+    //   scores = { [birdType]: questions.length };
+    //   renderBreakdownAndChart(scores);
+
+    //   document.getElementById("result").classList.remove("hidden");
+    // }
+
+    function showQuestion() {
+      if (currentQuestion >= questions.length) return showFinalResult();
+
+      let q = questions[currentQuestion];
+      document.getElementById("questionNum").textContent = currentQuestion + 1;
+      document.getElementById("questionText").textContent = q.text;
+
+      let answerDiv = document.getElementById("answers");
+      answerDiv.innerHTML = "";
+
+      for (let [answer, bird] of Object.entries(q.options)) {
+        let btn = document.createElement("button");
+        btn.textContent = answer;
+        btn.onclick = () => {
+          scores[bird] = (scores[bird] || 0) + 1;
+          nextQuestion();
+        };
+        answerDiv.appendChild(btn);
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      showQuestion();
+    }
+
+    function showFinalResult() {
+      document.getElementById("quiz").classList.add("hidden");
+
+      let playerName = document.getElementById("playerName").value.trim() || "Friend";
+
+      // Ensure all birds exist in scores (even if 0)
+      for (const b of ALL_BIRDS) scores[b] = scores[b] || 0;
+
+      // Pick winner (tie-breaker: first in ALL_BIRDS order)
+      let bestBird = ALL_BIRDS.reduce((best, b) => (scores[b] > scores[best] ? b : best), ALL_BIRDS[0]);
+
+    const info = birdDescriptions[bestBird];
+
+    document.getElementById("birdResult").textContent = info.title;
+    document.getElementById("birdDescription").innerHTML = `
+    <div style="margin: 10px auto; max-width: 560px; text-align: left;">
+        <div style="font-weight: bold; margin-bottom: 8px;">${info.tagline}</div>
+
+        <div style="margin: 10px 0;">
+        <div style="font-weight: bold;">✅ Strengths</div>
+        <ul style="margin: 6px 0 0 18px;">
+            ${info.strengths.map(s => `<li>${s}</li>`).join("")}
+        </ul>
+        </div>
+
+        <div style="margin: 10px 0;">
+        <div style="font-weight: bold;">⚠️ Watch-outs</div>
+        <ul style="margin: 6px 0 0 18px;">
+            ${info.cautions.map(c => `<li>${c}</li>`).join("")}
+        </ul>
+        </div>
+    </div>
+    `;
+    document.getElementById("birdImage").src = info.image;
+
+      renderBreakdownAndChart(scores);
+
+      document.getElementById("result").classList.remove("hidden");
+    }
+
+    function renderBreakdownAndChart(scoreObj) {
+      const total = questions.length;
+
+      // Percentages rounded to whole numbers (adjust if you want decimals)
+      const percents = {};
+      for (const b of ALL_BIRDS) {
+        percents[b] = Math.round((scoreObj[b] / total) * 100);
+      }
+
+      // Fix rounding so it always sums to 100
+      let sum = ALL_BIRDS.reduce((acc, b) => acc + percents[b], 0);
+      if (sum !== 100) {
+        // Add/subtract the difference to the top bird
+        const topBird = ALL_BIRDS.reduce((best, b) => (scoreObj[b] > scoreObj[best] ? b : best), ALL_BIRDS[0]);
+        percents[topBird] = Math.max(0, percents[topBird] + (100 - sum));
+      }
+
+      // Text breakdown
+      document.getElementById("otherBirds").textContent =
+        `Breakdown: Eagle ${percents.Eagle}% • Owl ${percents.Owl}% • Dove ${percents.Dove}% • Rooster ${percents.Rooster}%`;
+
+      // Build chart
+      const ctx = document.getElementById("birdChart");
+
+      if (birdChartInstance) birdChartInstance.destroy();
+
+      birdChartInstance = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: [
+            `Eagle (${percents.Eagle}%)`,
+            `Owl (${percents.Owl}%)`,
+            `Dove (${percents.Dove}%)`,
+            `Rooster (${percents.Rooster}%)`
+          ],
+          datasets: [{
+            data: [percents.Eagle, percents.Owl, percents.Dove, percents.Rooster],
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: "bottom" },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.label || "";
+                  const value = context.raw;
+                  return `${label}: ${value}%`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
